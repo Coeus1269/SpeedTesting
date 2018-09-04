@@ -9,4 +9,6 @@ BooleanSpeedTest - testing the different ways to test a boolean variable.
 
 HashTests - testing the different hash structures.
 
+Padding tests - speed testing left and right padding a string.
+
 ... and others
