@@ -41,6 +41,7 @@ public class StopWatch
 	elapsed time in seconds.
 	@return the time recorded on the stopwatch in seconds
 	*/
+
 	public double elapsedTimeSeconds()
 		{  return (elapsedtimeNano()) / NANOS_PER_SEC;		}
 	
@@ -57,13 +58,30 @@ public class StopWatch
 		}
 	
 	public double elapsedtimeMilli()
-		{ return (elapsedtimeNano()) / MILLIS_PER_SEC;			}
+		{ return (elapsedtimeMicro()) / 1000;			}
 	
 	public double elapsedtimeMicro()
-		{ return (elapsedtimeNano()) / MICROS_PER_SEC;			}
+		{ return (elapsedtimeNano()) / 1000;			}
+	
 	
 	
 	public String toString()
+	{   double ElapsedTime_dbl = elapsedtimeNano();
+	
+	if(ElapsedTime_dbl > 1000 )
+		{  if(ElapsedTime_dbl > 1000000)
+				{  if(ElapsedTime_dbl > NANOS_PER_SEC)
+					{  return toStringSeconds(); 				
+					}
+				return toStringMilli(); 				
+				}
+			return toStringMicro();
+		}
+	else
+		return toStringNano();
+	}
+	
+	public String toStringSeconds()
 		{ return  elapsedTimeSeconds() + " Seconds.";	}
 	
 	public String toStringMilli()
