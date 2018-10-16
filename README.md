@@ -5,10 +5,16 @@ There have been a number of times where me, or someone on my team have asked, "w
 
 This is some of the tests that we built to try and help answer the question.
 
-BooleanSpeedTest  - testing the different ways to test a boolean variable.
+BigDecimalTest      - speed testing big decimal assignment and retrevial
 
-HashTests         - testing some different hash structures.
+BooleanSpeedTest    - testing the different ways to test a boolean variable.
 
-Padding tests     - speed testing left and right padding of a string.
+HashTests           - testing some different hash structures.
 
-... and others, nore to come
+IFvsSwitch          - speed testing if else versus a switch or cases statement
+
+TestPaddingSpeed    - speed testing left and right padding of a string.
+
+TestStringEqual     - speed testing strimg compares
+
+... and others, more to come
