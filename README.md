@@ -12,7 +12,7 @@ HashTests           - testing some different hash structures.
 
 IFvsSwitch          - speed testing if else versus a switch or cases statement
 
-TestPaddingSpeed    - speed testing left and right padding of a string.
+TestPaddingSpeed    - speed testing differnt was to left and right pad of a string.
 
 TestStringEqual     - speed testing strimg compares
 
