@@ -2,8 +2,7 @@
 Speed testing many processes, loops and structures.
 
 There have been a number of times where me, or someone on my team have asked, "would it be faster to do it this way instead?"
-
-This is some of the tests that we built to try and help answer the question.
+This is a compliation of some of the tests that we built to try and help answer the question.
 
 BigDecimalTest      - speed testing big decimal assignment and retrevial
 
