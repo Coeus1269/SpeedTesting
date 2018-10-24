@@ -1,5 +1,6 @@
 package SpeedTests;
 
+import Utils.ConsoleOut;
 import Utils.Timer;
 
 public class TemplateSpeedTesting
@@ -11,7 +12,7 @@ public class TemplateSpeedTesting
 	
 	// To compare two different sections of code, process one, then log the results then process the second, etc.
 	
-	private static void TestFunction(String Source_str)
+	private static void TestFunction()
 	{
 		//Do someting
 	}
@@ -38,7 +39,7 @@ public class TemplateSpeedTesting
 			
 			// the simplest process to test, best action to call is a function or method
 			// your function or method here
-			TestFunction("Blah");
+			TestFunction();
 			
 			// pause the timer outside the loop but before we do any other actions
 			// total time and average time will be captured in teh timer class
@@ -48,17 +49,13 @@ public class TemplateSpeedTesting
 		timer.EndTimer(); // stop the timer when the loop is completed
 		
 		// Display the average time from all the loops processed
-		ConsoleOut(timer.AverageFormatedTime(intLoopA) + " Average Time per loop");
+		ConsoleOut.ConsoleOutString(timer.AverageFormatedTime(intLoopA) + " Average Time per loop");
 		
 		// total elapsed time
-		ConsoleOut(timer.FormatedTime() + " Total Elapsed Time: ");
+		ConsoleOut.ConsoleOutString(timer.FormatedTime() + " Total Elapsed Time: ");
 				
 		// just for kicks display the total paused time
-		ConsoleOut(timer.PausedtoString());
+		ConsoleOut.ConsoleOutString(timer.PausedtoString());
 	}
-	
-	public static void ConsoleOut(String String_str)
-	{
-		System.out.println(String_str);
-	}
+
 }

@@ -38,10 +38,6 @@ public class BigDecimalTest
 	{
 		return NumberFormat.getCurrencyInstance().format(BDtest);
 	}
-	
-//	public static String MoreBDGarbage()
-//	{
-//		return String.format("%,.2f", amount.setScale(2, RoundingMode.DOWN)); 
-//	}
+
 }
 
