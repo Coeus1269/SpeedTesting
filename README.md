@@ -11,7 +11,7 @@ We foud no significant speed gain from the various methods we tested.
 
 <b> HashTests </b>          - testing some different hash structures.
 
-<b> IFvsSwitch </b>          - speed testing if else versus a switch or cases statement<br>
+<b> IFvsSwitch </b>          - speed testing if else versus a switch or case statement<br>
 We found no significant difference. This test showed that in a loop of 100,000, both processed completely in approximately 14ms
 
 <b> TestPaddingSpeed </b>    - speed testing differnt was to left and right pad of a string.
