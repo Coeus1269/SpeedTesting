@@ -16,7 +16,7 @@ TestPaddingSpeed    - speed testing differnt was to left and right pad of a stri
 
 TestStringEqual     - speed testing strimg compares
 
-StringBuildervsStringAdd  - test the speed performance of the String builder append vs String + String
+StringBuildervsStringAdd  - test the speed performance of the String builder append vs String + String <br>
   It turns out that StringBuilder is much more efficient than String + String. We tested only a few different scenarios, all of which proved that SB append was faster than String +.
 
 ... and others, more to come
