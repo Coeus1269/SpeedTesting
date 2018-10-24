@@ -6,11 +6,13 @@ This is a compliation of some of the tests that we built to try and help answer 
 
 <b> BigDecimalTest</b>      - speed testing big decimal assignment and retrevial
 
-<b> BooleanSpeedTest</b>    - testing the different ways to test a boolean variable.
+<b> BooleanSpeedTest</b>    - testing the different ways to test a boolean variable.<br>
+We foud no significant speed gain from the various methods we tested.
 
 <b> HashTests </b>          - testing some different hash structures.
 
-<b> IFvsSwitch </b>          - speed testing if else versus a switch or cases statement
+<b> IFvsSwitch </b>          - speed testing if else versus a switch or cases statement<br>
+We found no significant difference. This test showed that in a loop of 100,000, both processed completely in approximately 14ms
 
 <b> TestPaddingSpeed </b>    - speed testing differnt was to left and right pad of a string.
 
