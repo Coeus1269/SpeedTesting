@@ -16,4 +16,6 @@ TestPaddingSpeed    - speed testing differnt was to left and right pad of a stri
 
 TestStringEqual     - speed testing strimg compares
 
+StringBuildervsStringAdd  - test the speed performance of the String builder vs + operator
+
 ... and others, more to come
