@@ -1,110 +1,142 @@
 package Utils;
 
 import java.util.concurrent.TimeUnit;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime; 
 
 public class Timer 
 {
 	private long startTime 				= 0;
-	private long endTime 				= 1;  // default values in case MillisecondsDifference() is called before start and end
-	private long pauseStart 			= 2;
-	private long pauseEnd 				= 2;
+	private long endTime 				= 0;  // default values in case MillisecondsDifference() is called before start and end
+	private long pauseStart 			= 0;
+	private long pauseEnd 				= 0;
 	private long totalPauseTimeElapsed 	= 0; // used when Pausing
 	
 	// Timer Class for capturing start and end time, with a pause option
 	
 	// USAGE: 
-	// StartTimer 				- start the timer
-	// Run the code to be tested
-	// EndTimer 				- stop the timer
-	// Optional, PauseTimer 	- pause the timer	
-	// Optional, ResumeTimer 	- continue the timer after paused		PausedtoString - display the paused time
-	// Either display the processed time or save the time in a variable for displaying averages
+	// 	StartTimer(); 							- start the timer
+	// 	Optionally, StartTimerPaused(); 		- start the timer paused, requires ResumeTimer(); at the desired actual start point
+	// 	Run the code to be tested
+	// 	EndTimer(); 							- stop the timer
+	//  System.Outprintln(FormatedTime());		- display the total time formated to hours, minutes, seconds, milliseconds
 	
-	// toString -  string output of the difference between start and end time
-	// FormatedTime - formated string of the time difference
-	// AverageFormatedTime - formated string of the time difference that include an option to average the time
-	// to use the AverageFormatedTime to display average process time for multiple loops,
-	// use the PauseTimer to make sure and capture only the code to be processed and not the prep work.
+	// Optional, PauseTimer 					- pause the timer	
+	// Optional, ResumeTimer 					- continue the timer after paused		
+	// PausedtoString 							- display the total paused time formated to hours, minutes, seconds, milliseconds
+	// toString 								- string output of the difference between start and end time e.g. 562554458 ms
+	// FormatedTime();							- string of the time difference formated to hours, minutes, seconds, milliseconds
+	// AverageFormatedTime();					- FormatedTime() that includes an option to average the time across multiple ran tasks
+	// 		to use the AverageFormatedTime to display average process time for multiple loops,
+	// 		use the PauseTimer to make sure and capture only the code to be processed and not the prep work.
 	//  for example:
-	//		StartTimerPaused
-	//		Loop
+	//		StartTimerPaused()
+	//		YourLoop
 	//			do prep work
-	//			ResumeTimer
-	//			call function or method to test
-	// 			PauseTimer
-	//		Next Loop
-	//		Call AverageFormatedTime(Loops Tested int)
-	// 			the average time is displayed
+	//			ResumeTimer()
+	//			function or method to test
+	// 			PauseTimer()
+	//		Next YourLoop
+	//		AverageFormatedTime(yourLoopsTested_int)
+	// 			-- the AVERAGE time is displayed formated to minutes, seconds, milliseconds
 	
-	public void StartTimer()
-		{
+	
+	public String StartTimer()
+		{// start the timer and stores the start time
 			startTime  = System.currentTimeMillis();
+			return CurrentTime();
 		}
 	
 	public long EndTimer()
-		{
+		{// ends the timer, stores the end time and returns the Time elapsed in milliseconds
 			endTime  = System.currentTimeMillis();
 			
-			return MillisecondsDifference();
+			return MillisecondsElapsed();
 		}
 	
 	public void StartTimerPaused()
-	{
-		startTime  = System.currentTimeMillis();
+		{// start the timer, stores the start time and pause the timer
+		StartTimer();
 		pauseStart  = System.currentTimeMillis();
-	}
+		}
 	
 	public void PauseTimer()
-		{
+		{// pauses the timer
 			pauseStart  = System.currentTimeMillis();
 		}
 	
 	public void ResumeTimer()
-		{
+		{//Resumes the timer and calculated the paused time
 			pauseEnd  = System.currentTimeMillis();
 			totalPauseTimeElapsed = totalPauseTimeElapsed + (pauseEnd - pauseStart);
 		}
 	
-	public long MillisecondsDifference()
-		{
+	public long MillisecondsElapsed()
+		{// returns the difference in milliseconds between start and end time not including paused time
 			return (endTime - startTime) - totalPauseTimeElapsed;
 		}
 	
 	public String PausedtoString()
-		{
+		{// returns a string describing the total time paused in milliseconds
 			if(totalPauseTimeElapsed > 0)
-				return "Time Paused: " + Long.toString( totalPauseTimeElapsed) + "ms ";
+				return FormatedTime("Time Paused: ", totalPauseTimeElapsed);
 			else
 				return "";
 		}
 	
 	public String toString()
-		{
+		{// returns the string difference in milliseconds between start and end time with the ms time unit
 			if (endTime > startTime +1)
-				return Long.toString(MillisecondsDifference()) + "ms ";
+				return Long.toString(MillisecondsElapsed()) + " ms";
 			else
 				return "Timer was not ran";
 		}
 	
-	public String FormatedTime()
-		{
-		return AverageFormatedTime(1l);
-		}
 	
 	public String AverageFormatedTime(Long Denominator_lng)
+		{// this can be used if the timer span encompass multiple tasks
+		long TimeSpan = MillisecondsElapsed() / Denominator_lng;
+		return FormatedTime("Average Elapsed Time: ", TimeSpan);
+		}
+	
+	public String FormatedTime()
+		{ return FormatedTime("Elapsed Time: ", MillisecondsElapsed()); }
+	
+	public static String FormatedTime(String Label_str, Long TotalTimeSpan_lng)
 		{
-		if (endTime > startTime +1)
+		// returns a formated string with the minutes, seconds, milliseconds and total milliseconds paused
+		// e.g. Elapsed Time: 0 min : 57 sec : 374 ms Time Paused: 540 ms
+		if (TotalTimeSpan_lng > 1)
 			{
-			long TimeSpan = MillisecondsDifference() / Denominator_lng;
-			return "Elapsed Time: " + 
-					String.format("%d min : %d sec : %d ms"
-					, TimeUnit.MILLISECONDS.toMinutes(TimeSpan)
-				    , TimeUnit.MILLISECONDS.toSeconds(TimeSpan) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(TimeSpan) )
-				    , TimeUnit.MILLISECONDS.toMillis(TimeSpan)
-				    );
+			// long DebugOriginalTimeSpan_lng = TotalTimeSpan_lng;
+			long Hours_lng = TimeUnit.MILLISECONDS.toHours(TotalTimeSpan_lng);
+			if(Hours_lng > 0)
+				TotalTimeSpan_lng = TotalTimeSpan_lng - TimeUnit.HOURS.toMillis(Hours_lng); // remove the Hours
+			long Minutes_lng = TimeUnit.MILLISECONDS.toMinutes(TotalTimeSpan_lng);
+			if(Minutes_lng > 0)
+				TotalTimeSpan_lng = TotalTimeSpan_lng - TimeUnit.MINUTES.toMillis(Minutes_lng); // remove the minutes
+			long Seconds_lng = TimeUnit.MILLISECONDS.toSeconds(TotalTimeSpan_lng);
+			if(Seconds_lng > 0 )
+				TotalTimeSpan_lng = TotalTimeSpan_lng - TimeUnit.SECONDS.toMillis(Seconds_lng); // remove the Seconds
+			
+			return Label_str + 
+					String.format("%d hr : %d min : %d sec : %d ms"
+							, Hours_lng
+							, Minutes_lng
+							, Seconds_lng
+							, TimeUnit.MILLISECONDS.toMillis(TotalTimeSpan_lng)
+							) 
+							// + " Original: " + DebugOriginalTimeSpan_lng
+					;					
 			}
 		else
 			return "Timer was not ran";
 		}
+ 
+	public String CurrentTime() 
+		{  
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		return dtf.format(now);
+		}	  
 }
-
