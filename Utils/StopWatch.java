@@ -4,6 +4,7 @@ public class StopWatch
 {
 	/**
 	 A class to measure time elapsed in NanoSeconds, MicroSeconds, MilliSecons or just seconds.
+	 this project was abandoned in favor of Timer.Java
 	*/
     private long startTime;
     private long stopTime;

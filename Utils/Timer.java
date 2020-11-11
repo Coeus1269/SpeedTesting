@@ -6,20 +6,15 @@ import java.time.LocalDateTime;
 
 public class Timer 
 {
-	private long startTime 				= 0;
-	private long endTime 				= 0;  // default values in case MillisecondsDifference() is called before start and end
-	private long pauseStart 			= 0;
-	private long pauseEnd 				= 0;
-	private long totalPauseTimeElapsed 	= 0; // used when Pausing
-	
-	// Timer Class for capturing start and end time, with a pause option
+	// Timer Class for capturing start and end time, with a pause option and a simple formatted toString()
 	
 	// USAGE: 
 	// 	StartTimer(); 							- start the timer
 	// 	Optionally, StartTimerPaused(); 		- start the timer paused, requires ResumeTimer(); at the desired actual start point
-	// 	Run the code to be tested
+	// 	Run your code to be tested
 	// 	EndTimer(); 							- stop the timer
-	//  System.Outprintln(FormatedTime());		- display the total time formated to hours, minutes, seconds, milliseconds
+	//  System.Out.println(FormatedTime());		- display the total time formated to hours, minutes, seconds, milliseconds
+	// 	Optionally, toString()					- returns a string difference in milliseconds between start and end time with the ms time unit
 	
 	// Optional, PauseTimer 					- pause the timer	
 	// Optional, ResumeTimer 					- continue the timer after paused		
@@ -40,6 +35,11 @@ public class Timer
 	//		AverageFormatedTime(yourLoopsTested_int)
 	// 			-- the AVERAGE time is displayed formated to minutes, seconds, milliseconds
 	
+	private long startTime 				= 0;
+	private long endTime 				= 0;  // default values in case MillisecondsDifference() is called before start and end
+	private long pauseStart 			= 0;
+	private long pauseEnd 				= 0;
+	private long totalPauseTimeElapsed 	= 0; // used when Pausing
 	
 	public String StartTimer()
 		{// start the timer and stores the start time
@@ -85,7 +85,8 @@ public class Timer
 		}
 	
 	public String toString()
-		{// returns the string difference in milliseconds between start and end time with the ms time unit
+		{// TODO: should return the formated string
+		// returns the string difference in milliseconds between start and end time with the ms time unit
 			if (endTime > startTime +1)
 				return Long.toString(MillisecondsElapsed()) + " ms";
 			else
